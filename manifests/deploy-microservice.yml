@@ -2,26 +2,26 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
     labels:
-        app: mild-temper-microservice
+        app: spoken-enemy-microservice
         stack: frontend
         source: demo
-    name: mild-temper-microservice
+    name: spoken-enemy-microservice
     namespace: microservices
 spec:
     replicas: 5
     selector:
         matchLabels:
-            run: mild-temper-microservice
+            run: spoken-enemy-microservice
     template:
         metadata:
             labels:
-                app: mild-temper-microservice
-                run: mild-temper-microservice
+                app: spoken-enemy-microservice
+                run: spoken-enemy-microservice
                 source: demo
         spec:
             containers:
                 -   image: 219099013464.dkr.ecr.us-west-2.amazonaws.com/mild-temper-microservice
-                    name: mild-temper-microservice
+                    name: spoken-enemy-microservice
                     ports:
                         -   name: web
                             containerPort: 8080
@@ -31,14 +31,14 @@ kind: Service
 apiVersion: v1
 metadata:
     labels:
-        app: mild-temper-microservice-service
+        app: spoken-enemy-microservice-service
         stack: frontend
-    name: mild-temper-microservice-service
+    name: spoken-enemy-microservice-service
     namespace: microservices
 spec:
     selector:
         source: demo
-        app: mild-temper-microservice
+        app: spoken-enemy-microservice
     ports:
         -   name: web
             protocol: TCP
@@ -54,7 +54,7 @@ metadata:
         stack: frontend
     annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /$2
-    name: mild-temper-ingress
+    name: spoken-enemy-ingress
     namespace: microservices
 spec:
     rules:
@@ -62,7 +62,7 @@ spec:
                 paths:
                     -   path: /mild-temper(/|$)(.*)
                         backend:
-                            serviceName: mild-temper-microservice-service
+                            serviceName: spoken-enemy-microservice-service
                             servicePort: 30201
 
 
